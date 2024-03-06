@@ -8,7 +8,7 @@ def get_timestamp_ms() -> int:
     return int(round(datetime.now(timezone.utc).timestamp() * 1000))
 
 
-def main(args):
+def handle(args):
     # --------------------------------------------------------------------------
     # Parse args
     # --------------------------------------------------------------------------
