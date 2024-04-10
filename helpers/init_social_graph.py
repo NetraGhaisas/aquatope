@@ -16,8 +16,8 @@ import numpy as np
 import pandas as pd
 import pymongo
 import requests
-from minio import Minio
-from minio.error import BucketAlreadyExists, BucketAlreadyOwnedByYou, ResponseError
+# from minio import Minio
+# from minio.error import BucketAlreadyExists, BucketAlreadyOwnedByYou, ResponseError
 from pymongo import MongoClient
 from tqdm import tqdm
 
@@ -30,7 +30,7 @@ PROJECT_DIR = Path(__file__).resolve().parents[1]
 sys.path.append(str(PROJECT_DIR))
 
 logger = logging.getLogger()
-
+social_graph_client = None
 
 def init_social_graph(social_graph_path):
     global logger
@@ -100,3 +100,13 @@ def init_social_graph(social_graph_path):
         follow(user_id=edge[0], followee_id=edge[1])
         follow(user_id=edge[1], followee_id=edge[0])
     logger.info("finish uploading social graph")
+
+
+if __name__ == "__main__":
+    mongo_config = {
+        "mongo_addr": "mongodb.default.svc.cluster.local",
+        "mongo_port": 27017
+    }
+    if social_graph_client is None:
+        social_graph_client = MongoClient(mongo_config["mongo_addr"], mongo_config["mongo_port"])
+    init_social_graph()
