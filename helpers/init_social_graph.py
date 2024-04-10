@@ -109,4 +109,4 @@ if __name__ == "__main__":
     }
     if social_graph_client is None:
         social_graph_client = MongoClient(mongo_config["mongo_addr"], mongo_config["mongo_port"])
-    init_social_graph()
+    init_social_graph("./socfb-Reed98")
