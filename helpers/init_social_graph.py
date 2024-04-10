@@ -3,6 +3,7 @@ import random
 import socket
 import string
 import sys
+import os
 import time
 import uuid
 import zipfile
@@ -20,6 +21,7 @@ import requests
 # from minio.error import BucketAlreadyExists, BucketAlreadyOwnedByYou, ResponseError
 from pymongo import MongoClient
 from tqdm import tqdm
+from urllib.parse import quote_plus
 
 from locust import HttpUser, constant_pacing, tag, task
 from locust.env import Environment
@@ -107,6 +109,13 @@ if __name__ == "__main__":
         "mongo_addr": "mongodb.default.svc.cluster.local",
         "mongo_port": 27017
     }
+    user = "root"
+    password = os.getenv("MONGODB_ROOT_PASSWORD")
+    host = mongo_config["mongo_addr"]+":"+mongo_config["mongo_port"]
+    uri = "mongodb://%s:%s@%s" % (
+        quote_plus(user), quote_plus(password), host)
+    # client = MongoClient(uri)
     if social_graph_client is None:
-        social_graph_client = MongoClient(mongo_config["mongo_addr"], mongo_config["mongo_port"], directConnection=True)
+        social_graph_client = MongoClient(uri, directConnection=True)
+        print(social_graph_client)
     init_social_graph("./socfb-Reed98")
