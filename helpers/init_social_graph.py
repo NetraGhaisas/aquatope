@@ -111,7 +111,7 @@ if __name__ == "__main__":
     }
     user = "root"
     password = os.getenv("MONGODB_ROOT_PASSWORD")
-    host = mongo_config["mongo_addr"]+":"+mongo_config["mongo_port"]
+    host = mongo_config["mongo_addr"]+":"+str(mongo_config["mongo_port"])
     uri = "mongodb://%s:%s@%s" % (
         quote_plus(user), quote_plus(password), host)
     # client = MongoClient(uri)
