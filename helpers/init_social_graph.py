@@ -108,5 +108,5 @@ if __name__ == "__main__":
         "mongo_port": 27017
     }
     if social_graph_client is None:
-        social_graph_client = MongoClient(mongo_config["mongo_addr"], mongo_config["mongo_port"])
+        social_graph_client = MongoClient(mongo_config["mongo_addr"], mongo_config["mongo_port"], directConnection=True)
     init_social_graph("./socfb-Reed98")
