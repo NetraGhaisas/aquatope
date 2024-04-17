@@ -21,7 +21,7 @@ def handle(args):
     media_types = req.get('media_types', ['png'])
     post_type = req.get('post_type', 'POST')
     mongo_config = req.get('mongo_config', {
-        'mongodb_addr': 'mongodb.faas.svc.cluster.local',
+        'mongodb_addr': 'mongodb.default.svc.cluster.local',
         'mongodb_port': 27017
     })
     # --------------------------------------------------------------------------

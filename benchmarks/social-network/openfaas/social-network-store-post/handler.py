@@ -1,12 +1,22 @@
 import json
+import os
 import random
 import string
 import sys
 from datetime import datetime, timezone
+from urllib.parse import quote_plus
 
 from pymongo import MongoClient
 
 mongo_client = None
+
+def get_uri():
+    password=""
+    with open("/var/openfaas/secrets/mongo-db-password") as f:
+        password = f.read()
+
+    return "mongodb://%s:%s@%s" % (
+    quote_plus("root"), quote_plus(password), os.getenv("mongo_host"))
 
 
 def get_timestamp_ms() -> int:
@@ -56,16 +66,17 @@ def handle(req):
             'timestamp': timestamp,
             'post_type': 'POST'
         }
-    mongo_config = args.get('mongo_config', dict())
-    mongodb_addr = mongo_config.get('mongodb_addr',
-                                    'mongodb.faas.svc.cluster.local')
-    mongodb_port = mongo_config.get('mongodb_port', 27017)
+    # mongo_config = args.get('mongo_config', dict())
+    # mongodb_addr = mongo_config.get('mongodb_addr',
+    #                                 'mongodb.faas.svc.cluster.local')
+    # mongodb_port = mongo_config.get('mongodb_port', 27017)
 
     # --------------------------------------------------------------------------
     # Function
     # --------------------------------------------------------------------------
     if mongo_client is None:
-        mongo_client = MongoClient(mongodb_addr, mongodb_port)
+        uri = get_uri()
+        mongo_client = MongoClient(uri)
 
     social_network_db = mongo_client['social_network']
     post_collection = social_network_db['post']
