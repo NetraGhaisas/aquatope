@@ -32,16 +32,17 @@ def handle(req):
     post_id = args.get('post_id', random.randint(1, sys.maxsize))
     post_timestamp = args.get('post_timestamp', get_timestamp_ms())
     user_mention_names = args.get('user_mention_names', list())
-    mongo_config = args.get('mongo_config', dict())
-    mongodb_addr = mongo_config.get('mongodb_addr',
-                                    'mongodb.default.svc.cluster.local')
-    mongodb_port = mongo_config.get('mongodb_port', 27017)
+    # mongo_config = args.get('mongo_config', dict())
+    # mongodb_addr = mongo_config.get('mongodb_addr',
+    #                                 'mongodb.default.svc.cluster.local')
+    # mongodb_port = mongo_config.get('mongodb_port', 27017)
 
     # --------------------------------------------------------------------------
     # Function
     # --------------------------------------------------------------------------
     if mongo_client is None:
-        mongo_client = MongoClient(mongodb_addr, mongodb_port)
+        uri = get_uri()
+        mongo_client = MongoClient(uri)
 
     social_network_db = mongo_client['social_network']
     user_collection = social_network_db['user']
