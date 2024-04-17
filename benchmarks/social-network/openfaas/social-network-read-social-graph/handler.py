@@ -12,7 +12,7 @@ def get_timestamp_ms() -> int:
     return int(round(datetime.now(timezone.utc).timestamp() * 1000))
 
 
-def handler(req):
+def handle(req):
     global mongo_client
 
     # --------------------------------------------------------------------------
