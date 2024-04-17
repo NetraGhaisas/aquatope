@@ -94,19 +94,21 @@ def init_social_graph(social_graph_path):
         edges = get_edges(file)
 
     logger.info("upload user nodes")
+    print("upload user nodes")
     for i in tqdm(range(1, nodes + 1)):
         register(user_id=i)
 
     logger.info("upload user edges")
+    print("upload user edges")
     for edge in tqdm(edges):
         follow(user_id=edge[0], followee_id=edge[1])
         follow(user_id=edge[1], followee_id=edge[0])
     logger.info("finish uploading social graph")
-
+    print("finished!")
 
 if __name__ == "__main__":
     mongo_config = {
-        "mongo_addr": "mongodb.default.svc.cluster.local",
+        "mongo_addr": "127.0.0.1",
         "mongo_port": 27017
     }
     user = "root"
