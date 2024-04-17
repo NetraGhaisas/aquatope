@@ -7,39 +7,99 @@ functions:
     lang: python3-flask-debian
     handler: ./social-network-compose-post
     image: netraghaisas/social-network-compose-post:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-image-filter:
     lang: python3-flask-debian
     handler: ./social-network-image-filter
     image: netraghaisas/social-network-image-filter:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-read-home-timeline:
     lang: python3-flask-debian
     handler: ./social-network-read-home-timeline
     image: netraghaisas/social-network-read-home-timeline:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-read-post:
     lang: python3-flask-debian
     handler: ./social-network-read-post
     image: netraghaisas/social-network-read-post:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-read-social-graph:
     lang: python3-flask-debian
     handler: ./social-network-read-social-graph
     image: netraghaisas/social-network-read-social-graph:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-read-user-timeline:
     lang: python3-flask-debian
     handler: ./social-network-read-user-timeline
     image: netraghaisas/social-network-read-user-timeline:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-store-post:
     lang: python3-flask-debian
     handler: ./social-network-store-post
     image: netraghaisas/social-network-store-post:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-text-filter:
     lang: python3-flask-debian
     handler: ./social-network-text-filter
     image: netraghaisas/social-network-text-filter:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-write-home-timeline:
     lang: python3-flask-debian
     handler: ./social-network-write-home-timeline
     image: netraghaisas/social-network-write-home-timeline:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password
   social-network-write-user-timeline:
     lang: python3-flask-debian
     handler: ./social-network-write-user-timeline
     image: netraghaisas/social-network-write-user-timeline:latest
+    environment:
+      mongo_host: mongodb.default.svc.cluster.local:27017
+      write_debug: true
+      combine_output: false
+    secrets:
+    - mongo-db-password

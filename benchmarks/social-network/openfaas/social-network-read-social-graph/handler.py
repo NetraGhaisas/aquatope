@@ -1,12 +1,21 @@
 import random
 import sys
+import os
 import json
 from datetime import datetime, timezone
 
 from pymongo import MongoClient
+from urllib.parse import quote_plus
 
 mongo_client = None
 
+def get_uri():
+    password=""
+    with open("/var/openfaas/secrets/mongo-db-password") as f:
+        password = f.read()
+
+    return "mongodb://%s:%s@%s" % (
+    quote_plus("root"), quote_plus(password), os.getenv("mongo_host"))
 
 def get_timestamp_ms() -> int:
     return int(round(datetime.now(timezone.utc).timestamp() * 1000))
@@ -25,7 +34,7 @@ def handle(req):
     user_mention_names = args.get('user_mention_names', list())
     mongo_config = args.get('mongo_config', dict())
     mongodb_addr = mongo_config.get('mongodb_addr',
-                                    'mongodb.faas.svc.cluster.local')
+                                    'mongodb.default.svc.cluster.local')
     mongodb_port = mongo_config.get('mongodb_port', 27017)
 
     # --------------------------------------------------------------------------
