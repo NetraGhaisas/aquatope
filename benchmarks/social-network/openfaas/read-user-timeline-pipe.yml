@@ -8,9 +8,9 @@ functions:
     handler: ./read-user-timeline-pipe
     image: netraghaisas/read-user-timeline-pipe:latest
     labels:
-      faas-flow: 1
+      faas-flow: 2
     annotations:
-      faas-flow-desc: "Read user timeline"
+      faas-flow-desc: "Pipeline for read user timeline"
     environment_file:
       - conf.yml
     secrets:
