@@ -1,7 +1,9 @@
 package function
 
 import (
+	"encoding/json"
 	"fmt"
+
 	faasflow "github.com/faasflow/lib/openfaas"
 )
 
@@ -9,7 +11,7 @@ import (
 func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
 	flow.SyncNode().
 	Modify(func(data []byte) ([]byte, error) {
-		data = []byte("{\"user_id\":"+string(data) + "}")
+		data,_ = json.Marshal(data)
 		return data, nil
 	}).
 	Apply("social-network-read-user-timeline").
