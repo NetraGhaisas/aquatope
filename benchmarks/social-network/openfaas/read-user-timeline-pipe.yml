@@ -1,0 +1,19 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  read-user-timeline-pipe:
+    lang: faas-flow
+    handler: ./read-user-timeline-pipe
+    image: netraghaisas/read-user-timeline-pipe:latest
+    labels:
+      faas-flow: 1
+    annotations:
+      faas-flow-desc: "Read user timeline"
+    environment_file:
+      - conf.yml
+    secrets:
+      - s3-secret-key
+      - s3-access-key
+
