@@ -14,7 +14,7 @@ func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
 	// 	data,_ = json.Marshal(data)
 	// 	return data, nil
 	// }).
-	Apply("social-network-read-user-timeline").
+	// Apply("social-network-read-user-timeline").
 	Modify(func(data []byte) ([]byte, error) {
 		return []byte(fmt.Sprintf("Function returned \"%s\"", string(data))), nil
 	})
