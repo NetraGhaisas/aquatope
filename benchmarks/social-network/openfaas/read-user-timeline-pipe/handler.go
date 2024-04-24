@@ -13,10 +13,12 @@ func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
 	// 		data = []byte(string(data) + "modifier")
 	// 		return data, nil
 	// 	})
-	flow.SyncNode().Modify(func(data []byte) ([]byte, error) {
-		data, _ = json.Marshal(data)
-		return data, nil
-	}).Apply("social-network-read-user-timeline").Modify(func(data []byte) ([]byte, error) {
+	flow.SyncNode().
+	// Modify(func(data []byte) ([]byte, error) {
+	// 	data, _ = json.Marshal(data)
+	// 	return data, nil
+	// }).
+	Apply("social-network-read-user-timeline").Modify(func(data []byte) ([]byte, error) {
 		return []byte(fmt.Sprintf("Function returned \"%s\"", string(data))), nil
 	})
 	return
