@@ -1,7 +1,6 @@
 package function
 
 import (
-	// "encoding/json"
 	"fmt"
 
 	faasflow "github.com/faasflow/lib/openfaas"
@@ -9,16 +8,7 @@ import (
 
 // Define provide definition of the workflow
 func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
-	// flow.SyncNode().Modify(func(data []byte) ([]byte, error) {
-	// 		data = []byte(string(data) + "modifier")
-	// 		return data, nil
-	// 	})
-	flow.SyncNode().
-		// Modify(func(data []byte) ([]byte, error) {
-		// 	data, _ = json.Marshal(data)
-		// 	return data, nil
-		// }).
-		Apply("social-network-read-user-timeline").Modify(func(data []byte) ([]byte, error) {
+	flow.SyncNode().Apply("social-network-read-user-timeline").Modify(func(data []byte) ([]byte, error) {
 		return []byte(fmt.Sprintf("Function returned \"%s\"", string(data))), nil
 	})
 	return
