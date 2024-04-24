@@ -1,7 +1,7 @@
 package function
 
 import (
-	"encoding/json"
+	// "encoding/json"
 	"fmt"
 
 	faasflow "github.com/faasflow/lib/openfaas"
