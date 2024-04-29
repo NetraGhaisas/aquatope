@@ -8,7 +8,7 @@ import (
 
 // Define provide definition of the workflow
 func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
-	flow.SyncNode().Apply("social-network-read-user-timeline").Modify(func(data []byte) ([]byte, error) {
+	flow.SyncNode().Apply("social-network-write-user-timeline").Apply("social-network-read-user-timeline").Modify(func(data []byte) ([]byte, error) {
 		return []byte(fmt.Sprintf("Function returned \"%s\"", string(data))), nil
 	})
 	return
