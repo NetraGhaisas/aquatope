@@ -8,9 +8,26 @@ import (
 
 // Define provide definition of the workflow
 func Define(flow *faasflow.Workflow, context *faasflow.Context) (err error) {
-	flow.SyncNode().Apply("social-network-write-user-timeline").Apply("social-network-read-user-timeline").Modify(func(data []byte) ([]byte, error) {
+
+	dag := flow.Dag()
+	dag.Node("n1").Apply("social-network-compose-post")
+	dag.Node("n2").Apply("social-network-read-social-graph")
+	dag.Node("n3").Apply("social-network-store-post").Modify(func(data []byte) ([]byte, error) {
 		return []byte(fmt.Sprintf("Function returned \"%s\"", string(data))), nil
 	})
+	dag.Node("n4").Apply("social-network-write-home-timeline").Modify(func(data []byte) ([]byte, error) {
+		return []byte(fmt.Sprintf("Function returned \"%s\"", string(data))), nil
+	})
+	dag.Edge("n1", "n2")
+	dag.Edge("n1", "n3")
+	dag.Edge("n2", "n4")
+
+	// flow.SyncNode().
+	// Apply("social-network-compose-post").
+	// Apply("social-network-read-user-timeline").
+	// Modify(func(data []byte) ([]byte, error) {
+	// 	return []byte(fmt.Sprintf("Function returned \"%s\"", string(data))), nil
+	// })
 	return
 }
 
