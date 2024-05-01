@@ -6,5 +6,5 @@ functions:
   social-network-pipeline:
     lang: python3-flask-debian
     handler: ./social-network-pipeline
-    image: social-network-pipeline:latest
+    image: netraghaisas/social-network-pipeline:latest
 
