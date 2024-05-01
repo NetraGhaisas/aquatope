@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  social-network-pipeline:
+    lang: python3-flask-debian
+    handler: ./social-network-pipeline
+    image: social-network-pipeline:latest
+
