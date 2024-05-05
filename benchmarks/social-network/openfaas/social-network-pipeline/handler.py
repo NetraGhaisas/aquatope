@@ -2,7 +2,7 @@ import requests
 import json
 
 def handle(req):
-    # Define the URLs of the two OpenFaaS functions
+    # Define the URLs of the OpenFaaS functions
     function1_url = "http://gateway.openfaas:8080/function/social-network-compose-post"
     function2_url = "http://gateway.openfaas:8080/function/social-network-store-post"
     function3_url = "http://gateway.openfaas:8080/function/social-network-read-social-graph"
